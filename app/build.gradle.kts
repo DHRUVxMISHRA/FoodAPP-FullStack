@@ -6,6 +6,7 @@ plugins {
     id("com.google.dagger.hilt.android")
     id("kotlin-kapt")
     kotlin("plugin.serialization") version "2.0.0"
+    alias(libs.plugins.google.gms.google.services)
 }
 
 android {
@@ -53,6 +54,10 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.firebase.auth)//firebase dependency which will be added automatically after you accept changes in authenticate using google in tool option in firebase
+    implementation(libs.androidx.credentials)
+    implementation(libs.androidx.credentials.play.services.auth)
+    implementation(libs.googleid)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -62,8 +67,10 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
     //Glide
-    implementation("com.github.bumptech.glide:glide:5.0.0")
-    implementation("com.github.bumptech.glide:compose:1.0.0-beta03")
+        implementation ("com.github.bumptech.glide:glide:4.16.0") // Use the latest stable version
+    kapt("com.github.bumptech.glide:compiler:4.16.0")
+    // Use the same version as glide
+    implementation("com.github.bumptech.glide:compose:1.0.0-beta01")
 
     implementation("androidx.compose.material:material-icons-extended:1.7.8")
 
