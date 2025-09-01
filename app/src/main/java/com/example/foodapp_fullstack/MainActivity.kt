@@ -11,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.foodapp_fullstack.presentation.components.DiningScreenContent
 import com.example.foodapp_fullstack.ui.theme.FoodApp_FullStackTheme
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.HiltAndroidApp
@@ -23,6 +24,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             FoodApp_FullStackTheme {
 
+                DiningScreenContent()
             }
         }
     }
