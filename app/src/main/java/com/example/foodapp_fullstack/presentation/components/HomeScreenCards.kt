@@ -2,6 +2,7 @@ package com.example.foodapp_fullstack.presentation.components
 
 import android.widget.Space
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -20,6 +21,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -31,6 +33,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -106,7 +109,7 @@ fun CardImageRow(
         state = pagerState
     ) {
 
-        when (pagerState.currentPager) {
+        when (pagerState.currentPage) {
             0 -> AsyncImage(
                 model = R.drawable.veg_biryani,
                 modifier = Modifier.fillMaxWidth(),
@@ -164,7 +167,8 @@ fun DetailCard() {
     val restaurantName = remember{ mutableStateOf("Haldiram's") }
     val rating = remember { mutableStateOf("4.2") }
     Card(
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier
+            .fillMaxWidth()
             .height(100.dp),
         colors = CardDefaults.cardColors(
             contentColor = Color.White
@@ -187,7 +191,7 @@ fun DetailCard() {
                 Card(modifier = Modifier
                     .size(width = 45.dp, height = 22.dp),
                     shape = RoundedCornerShape(6.dp),
-                    colors = CardDefaults.cardColors(colorResource(R.color.teal_700)),
+                    colors = CardDefaults.cardColors(colorResource(R.color.teal_700)),//green
                     ) {
 
                     Row(
@@ -223,10 +227,131 @@ fun DetailCard() {
                 colors = CardDefaults.cardColors(Color.Gray.copy(alpha = 0.2f))
             ) {
 
+                Row(modifier = Modifier
+                    .fillMaxWidth()) {
+                    Icon(painter = painterResource(R.drawable.check),
+                        modifier = Modifier
+                            .padding(start = 8.dp, top = 6.dp)
+                            .size(12.dp),
+                        tint = colorResource(R.color.purple_500),//green
+                        contentDescription = null
+                         )
+                    Spacer(modifier = Modifier.width(4.dp))
+                    Text(text = "On Time Preparation",
+                        color = Color.Gray,
+                        fontSize = 14.sp)
+                }
+            }
+            HorizontalDivider(modifier = Modifier
+                .padding(start = 16.dp, top = 6.dp, end = 16.dp),
+                color = colorResource(R.color.purple_500),//gray
+                thickness = 1.dp
+            )
+
+            Row(modifier = Modifier.fillMaxWidth()){
+                Icon(painter = painterResource(R.drawable.discount),
+                    modifier = Modifier
+                        .padding(start = 16.dp, top = 3.dp)
+                        .size(16.dp),
+                    tint = Color.Blue,
+                    contentDescription = null)
+
+                Spacer(modifier = Modifier.width(4.dp))
+                Text(text = "Flat ₹50 OFF on above ₹249",
+                    modifier = Modifier
+                        .padding(start = 4.dp),
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = Color.Gray)
             }
         }
+    }
+}
 
-        
+
+@Composable
+fun SmallDetailCard() {
+
+    val timedText = remember { mutableStateOf("44 mins") }
+    val distance = remember { mutableStateOf("1.6 km") }
+
+    Card(
+        modifier = Modifier
+            .size(width = 122.dp, height = 25.dp),
+        colors = CardDefaults.cardColors(contentColor = Color.White),
+        shape = RoundedCornerShape(topEnd = 12.dp)
+    ) {
+        Row(modifier = Modifier.fillMaxWidth()) {
+            Icon(painter = painterResource(R.drawable.timer),
+                modifier = Modifier
+                    .padding(start = 5.dp, top = 5.dp, bottom = 5.dp)
+                    .size(15.dp),
+                tint = Color.Green,
+                contentDescription = null)
+
+            Text(text = timedText.value,
+                modifier = Modifier
+                    .padding(start = 2.dp, top = 2.dp, bottom = 2.dp),
+                fontSize = 11.sp,
+                fontWeight = FontWeight.SemiBold,
+                color = Color.Gray)
+
+            Icon(painter = painterResource(R.drawable.dot),
+                modifier = Modifier
+                    .padding(top = 4.dp)
+                    .size(18.dp),
+                tint = Color.Gray,
+                contentDescription = null)
+
+            Text(text = distance.value,
+                modifier = Modifier
+                    .padding(top = 2.dp, bottom = 2.dp),
+                fontSize = 11.sp,
+                fontWeight = FontWeight.SemiBold,
+                color = Color.Gray)
+        }
+    }
+}
+
+
+@Composable
+fun PriceCard(
+    name : String,
+    price : String
+) {
+
+    Card(
+        modifier = Modifier
+            .padding(top = 12.dp)
+            .size(width = 160.dp, height = 21.dp)
+            .clickable{},
+        shape = RoundedCornerShape(6.dp),
+        colors = CardDefaults.cardColors(containerColor = Color.Black.copy(alpha = 0.5f))
+    ) {
+
+        Row(
+            modifier = Modifier
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly,
+            verticalAlignment = Alignment.CenterVertically
+        ){
+            Text(text = name,
+                color = Color.White,
+                fontSize = 12.sp,
+                fontWeight = FontWeight.SemiBold)
+
+            Icon(
+                painter = painterResource(R.drawable.dot),
+                modifier = Modifier.size(16.dp),
+                tint = Color.White,
+                contentDescription = null
+            )
+
+            Text(text = price,
+                color = Color.White,
+                fontSize = 12.sp,
+                fontWeight = FontWeight.SemiBold)
+        }
     }
     
 }
