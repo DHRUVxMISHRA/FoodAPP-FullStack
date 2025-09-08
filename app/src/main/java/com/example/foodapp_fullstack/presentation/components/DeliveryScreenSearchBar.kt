@@ -44,7 +44,9 @@ import androidx.navigation.NavController
 
 @Preview
 @Composable
-fun DeliveryScreenSearchBar() {
+fun DeliveryScreenSearchBar(
+    navController: NavController
+) {
 
     var query by remember { mutableStateOf("") }
 
